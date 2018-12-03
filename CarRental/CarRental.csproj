@@ -199,6 +199,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CarsController.cs" />
+    <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -216,9 +217,33 @@
     <Compile Include="Migrations\201811291407590_AddMembershipType.Designer.cs">
       <DependentUpon>201811291407590_AddMembershipType.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201811291500509_PopulateMembershipTypes.cs" />
-    <Compile Include="Migrations\201811291500509_PopulateMembershipTypes.Designer.cs">
-      <DependentUpon>201811291500509_PopulateMembershipTypes.cs</DependentUpon>
+    <Compile Include="Migrations\201811300011207_MembershipTypes.cs" />
+    <Compile Include="Migrations\201811300011207_MembershipTypes.Designer.cs">
+      <DependentUpon>201811300011207_MembershipTypes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811300020396_ApplyAnnotationsToCustomerName.cs" />
+    <Compile Include="Migrations\201811300020396_ApplyAnnotationsToCustomerName.Designer.cs">
+      <DependentUpon>201811300020396_ApplyAnnotationsToCustomerName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811301351100_AddColumnNameMemebershipType.cs" />
+    <Compile Include="Migrations\201811301351100_AddColumnNameMemebershipType.Designer.cs">
+      <DependentUpon>201811301351100_AddColumnNameMemebershipType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811301353167_AddFillNameMemebershipType.cs" />
+    <Compile Include="Migrations\201811301353167_AddFillNameMemebershipType.Designer.cs">
+      <DependentUpon>201811301353167_AddFillNameMemebershipType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811301424569_AddColumnBirthdayDate.cs" />
+    <Compile Include="Migrations\201811301424569_AddColumnBirthdayDate.Designer.cs">
+      <DependentUpon>201811301424569_AddColumnBirthdayDate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811301613463_AddTypeOfCarAndPropertiesCar.cs" />
+    <Compile Include="Migrations\201811301613463_AddTypeOfCarAndPropertiesCar.Designer.cs">
+      <DependentUpon>201811301613463_AddTypeOfCarAndPropertiesCar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811301615551_AddTypesOfCar.cs" />
+    <Compile Include="Migrations\201811301615551_AddTypesOfCar.Designer.cs">
+      <DependentUpon>201811301615551_AddTypesOfCar.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -227,9 +252,9 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MembershipType.cs" />
+    <Compile Include="Models\TypeOfCar.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="ViewModels\RandomCarViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -281,7 +306,9 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -315,7 +342,7 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Cars\Random.cshtml" />
+    <Content Include="Views\Cars\Details.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
     <Content Include="Scripts\umd\popper-utils.min.js.map" />
@@ -326,9 +353,13 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Shared\_NavBar.cshtml" />
+    <Content Include="Views\Customers\Index.cshtml" />
+    <Content Include="Views\Customers\Details.cshtml" />
+    <Content Include="Views\Cars\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -351,8 +382,26 @@
     <EmbeddedResource Include="Migrations\201811291407590_AddMembershipType.resx">
       <DependentUpon>201811291407590_AddMembershipType.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201811291500509_PopulateMembershipTypes.resx">
-      <DependentUpon>201811291500509_PopulateMembershipTypes.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201811300011207_MembershipTypes.resx">
+      <DependentUpon>201811300011207_MembershipTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811300020396_ApplyAnnotationsToCustomerName.resx">
+      <DependentUpon>201811300020396_ApplyAnnotationsToCustomerName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811301351100_AddColumnNameMemebershipType.resx">
+      <DependentUpon>201811301351100_AddColumnNameMemebershipType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811301353167_AddFillNameMemebershipType.resx">
+      <DependentUpon>201811301353167_AddFillNameMemebershipType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811301424569_AddColumnBirthdayDate.resx">
+      <DependentUpon>201811301424569_AddColumnBirthdayDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811301613463_AddTypeOfCarAndPropertiesCar.resx">
+      <DependentUpon>201811301613463_AddTypeOfCarAndPropertiesCar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811301615551_AddTypesOfCar.resx">
+      <DependentUpon>201811301615551_AddTypesOfCar.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

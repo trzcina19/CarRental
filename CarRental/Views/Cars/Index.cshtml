@@ -1,0 +1,27 @@
+﻿@model IEnumerable<CarRental.Models.Car>
+@{
+    ViewBag.Title = "Cars";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Cars</h2>
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Car</th>
+            <th>Type of car</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var car in Model)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(car.Name, "Details", "Cars", new { id = car.Id }, null)
+                </td>
+                <td>
+                @car.TypeOfCar.Name
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
