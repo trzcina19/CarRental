@@ -1,6 +1,7 @@
 ﻿using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using CarRental.Migrations;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
@@ -22,6 +23,10 @@ namespace CarRental.Models
     {
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Car> Cars { get; set; }
+        public DbSet<MembershipType> MembershipTypes { get; set; }
+
+  
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
