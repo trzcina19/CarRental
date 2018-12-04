@@ -4,6 +4,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <h2>Cars</h2>
+<p>
+    @Html.ActionLink("New Car", "New", "Cars", null, new { @class = "btn btn-primary" })
+</p>
+
+
 <table class="table table-bordered table-hover">
     <thead>
         <tr>
@@ -16,10 +21,11 @@
         {
             <tr>
                 <td>
-                    @Html.ActionLink(car.Name, "Details", "Cars", new { id = car.Id }, null)
+                    @Html.ActionLink(car.Name, "Edit", "Cars", new { id = car.Id }, null)
+
                 </td>
                 <td>
-                @car.TypeOfCar.Name
+                    @car.TypeOfCar.Name
                 </td>
             </tr>
         }

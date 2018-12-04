@@ -5,12 +5,12 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
+using CarRental.ViewModels;
 
 namespace CarRental.Controllers
 {
     public class CarsController : Controller
     {
-
 
         private ApplicationDbContext _context;
         public CarsController()
@@ -28,27 +28,55 @@ namespace CarRental.Controllers
             return View(cars);
         }
 
-        public ActionResult Details(int id)
+        public ActionResult New()
         {
-            var car = _context.Cars.Include(c => c.TypeOfCar).SingleOrDefault(c => c.Id == id);
+            var typeOfCars = _context.TypeOfCars.ToList();
+            var viewModel = new CarFormViewModel
+            {
+                TypeOfCars = typeOfCars
+            };
+            return View("carFormViewModel", viewModel);
+        }
+
+        public ActionResult Edit(int id)
+        {
+            var car = _context.Cars.SingleOrDefault(c => c.Id == id);
+
             if (car == null)
                 return HttpNotFound();
 
-            return View(car);
+            var viewModel = new CarFormViewModel
+            {
+                Car = car,
+                TypeOfCars = _context.TypeOfCars.ToList()
+            };
+
+            return View("CarFormViewModel", viewModel);
         }
 
 
+        [HttpPost]
+        public ActionResult Save(Car car)
+        {
+            if (car.Id == 0)
+            {
+                car.DateAdded = DateTime.Now;
+                _context.Cars.Add(car);
+            }
+            else
+            {
+                var carInDb = _context.Cars.Single(m => m.Id == car.Id);
+                carInDb.Name = car.Name;
+                carInDb.TypeOfCarId = car.TypeOfCarId;
+                carInDb.NumberInStock = car.NumberInStock;
+                carInDb.ReleaseDate = car.ReleaseDate;
+            }
 
+            _context.SaveChanges();
 
+            return RedirectToAction("Index", "Cars");
+        }
 
-        //private IEnumerable<Car> GetCars()
-        //{
-        //    return new List<Car>
-        //    {
-        //        new Car { Id = 1, Name = "Shrek" },
-        //        new Car { Id = 2, Name = "Wall-e" }
-        //    };
-        //}
 
 
     }
