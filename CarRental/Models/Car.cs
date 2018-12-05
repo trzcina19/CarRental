@@ -14,6 +14,7 @@ namespace CarRental.Models
         public string Name { get; set; }
         public TypeOfCar TypeOfCar { get; set; }
         [Required]
+        [Display(Name = "Type of car")]
         public byte TypeOfCarId { get; set; }
         public DateTime DateAdded { get; set; }
         public DateTime ReleaseDate { get; set; }
