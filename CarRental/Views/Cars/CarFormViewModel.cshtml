@@ -9,23 +9,40 @@
 
 @using (Html.BeginForm("Save", "Cars"))
 {
+    //    @Html.ValidationSummary()
+    @Html.ValidationSummary(true, "Please fix rhe following errors.")
+
     <div class="form-group">
         @Html.LabelFor(c => c.Car.Name)
         @Html.TextBoxFor(c => c.Car.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(c => c.Car.Name)
     </div>
 
     <div class="form-group">
         @Html.LabelFor(m => m.Car.ReleaseDate)
         @Html.TextBoxFor(m => m.Car.ReleaseDate, "{0:d MMM yyyy}", new { @class = "form-control" })
+        @Html.ValidationMessageFor(c => c.Car.ReleaseDate)
     </div>
+
     <div class="form-group">
         @Html.LabelFor(m => m.Car.TypeOfCarId)
         @Html.DropDownListFor(m => m.Car.TypeOfCarId, new SelectList(Model.TypeOfCars, "Id", "Name"), "", new { @class = "form-control" })
+        @Html.ValidationMessageFor(c => c.Car.TypeOfCarId)
     </div>
+
     <div class="form-group">
         @Html.LabelFor(m => m.Car.NumberInStock)
         @Html.TextBoxFor(m => m.Car.NumberInStock, new { @class = "form-control" })
+        @Html.ValidationMessageFor(c => c.Car.NumberInStock)
     </div>
     @Html.HiddenFor(m => m.Car.Id)
+    @Html.AntiForgeryToken()
+
     <button type="submit" class="btn btn-primary">Save</button>
+}
+
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
 }

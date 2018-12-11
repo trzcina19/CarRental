@@ -20,7 +20,6 @@ namespace CarRental.ViewModels
                 return "New Customer";
             }
 
-
         }
     }
 }

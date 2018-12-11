@@ -30,9 +30,11 @@ namespace CarRental.Controllers
 
         public ActionResult New()
         {
+            var car = new Car { ReleaseDate = DateTime.Now };
             var typeOfCars = _context.TypeOfCars.ToList();
             var viewModel = new CarFormViewModel
             {
+                Car=car,
                 TypeOfCars = typeOfCars
             };
             return View("carFormViewModel", viewModel);
@@ -56,8 +58,19 @@ namespace CarRental.Controllers
 
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Save(Car car)
         {
+            if (!ModelState.IsValid)
+            {
+                var viewModel = new CarFormViewModel
+                {
+                    Car=car,
+                    TypeOfCars = _context.TypeOfCars.ToList()
+                };
+                return View("CarFormViewModel", viewModel);
+            }
+
             if (car.Id == 0)
             {
                 car.DateAdded = DateTime.Now;
@@ -76,8 +89,5 @@ namespace CarRental.Controllers
 
             return RedirectToAction("Index", "Cars");
         }
-
-
-
     }
 }
