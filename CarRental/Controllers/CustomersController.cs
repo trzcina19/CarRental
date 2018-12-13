@@ -67,6 +67,7 @@ namespace CarRental.Controllers
             return RedirectToAction("Index", "Customers");
         }
 
+
         public ViewResult Index()
         {
             //   var customers = _context.Customers.Include(c => c.MembershipType).ToList();

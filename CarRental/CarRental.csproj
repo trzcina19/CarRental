@@ -268,6 +268,10 @@
     <Compile Include="Migrations\201811301615551_AddTypesOfCar.Designer.cs">
       <DependentUpon>201811301615551_AddTypesOfCar.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201812131648403_SeedUsers.cs" />
+    <Compile Include="Migrations\201812131648403_SeedUsers.Designer.cs">
+      <DependentUpon>201812131648403_SeedUsers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Car.cs" />
@@ -667,6 +671,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201811301615551_AddTypesOfCar.resx">
       <DependentUpon>201811301615551_AddTypesOfCar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812131648403_SeedUsers.resx">
+      <DependentUpon>201812131648403_SeedUsers.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
