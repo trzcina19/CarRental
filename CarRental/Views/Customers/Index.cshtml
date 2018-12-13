@@ -16,9 +16,11 @@
 }
 
 <h2>Customers</h2>
-<p>
-    @Html.ActionLink("New Customer", "New", "Customers", null, new { @class = "btn btn-primary" })
-</p>
+@*<p>
+        @Html.ActionLink("New Customer", "New", "Customers", null, new { @class = "btn btn-primary" })
+    </p>*@
+
+
 
 <table id="customers" class="table table-bordered table-hover">
     <thead>
@@ -29,22 +31,24 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var customer in Model)
-        {
-            <tr>
-                <td>
-                    @Html.ActionLink(customer.Name, "Edit", "Customers", new { id = customer.Id }, null)
-                </td>
-                <td>
-                    @customer.MembershipType.Name
-                </td>
-                <td>
-                    <button data-customer-id="@customer.Id" class="btn-link js-delete">
-                        Delete
-                    </button>
-                </td>
-            </tr>
-        }
+
+        @*@foreach (var customer in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.ActionLink(customer.Name, "Edit", "Customers", new { id = customer.Id }, null)
+                    </td>
+                    <td>
+                        @customer.MembershipType.Name
+                    </td>
+                    <td>
+                        <button data-customer-id="@customer.Id" class="btn-link js-delete">
+                            Delete
+                        </button>
+                    </td>
+                </tr>
+            }*@
+
     </tbody>
 </table>
 
@@ -53,9 +57,34 @@
     <script>
         $(document).ready
             (function () {
-                $("#customers").dataTable();
+                $("#customers").dataTable({
+                    ajax: {
+                        url: "/api/customers",
+                        dataSrc: ""
 
-                $("#customers").on("click","js-delete" , function () {
+
+                    },
+                    columns: [
+                        {
+                            data: "name ",
+                            render: function (data, type, customer) {
+                                return "<a href='/customers/edit" + customer.id + "'>" + customer.name + "</a>";
+                            }
+                        },
+                        {
+                            data: "name"
+                        },
+                        {
+                            data: "id",
+                            render: function (data) {
+                                return "<button class='btn-link js-delete' data-customer-id=" + data + ">Delete</button>"
+                            }
+                        }
+                    ]
+
+                });
+
+                $("#customers").on("click", "js-delete", function () {
                     var button = $(this);
                     bootbox.confirm("Are you sure you want to delete the customer ?", function (result) {
                         if (result) {
