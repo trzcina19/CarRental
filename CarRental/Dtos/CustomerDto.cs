@@ -15,11 +15,11 @@ namespace CarRental.Dtos
         [StringLength(255)]
         public string Name { get; set; }
 
-  //      [Min18YearsIfAMember]
+        //      [Min18YearsIfAMember]
         public DateTime? BirthdayDate { get; set; }
         public bool IsSubscribedToNewsletter { get; set; }
 
-       // public MembershipType MembershipType { get; set; }
+        public MembershipTypeDto MembershipType { get; set; }
         public byte MembershipTypeId { get; set; }
 
     }

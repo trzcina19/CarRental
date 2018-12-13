@@ -9,25 +9,92 @@
 </p>
 
 
-<table class="table table-bordered table-hover">
+<table id="cars" class="table table-bordered table-hover">
     <thead>
         <tr>
             <th>Car</th>
             <th>Type of car</th>
+            <th>Delete</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var car in Model)
-        {
-            <tr>
-                <td>
-                    @Html.ActionLink(car.Name, "Edit", "Cars", new { id = car.Id }, null)
 
-                </td>
-                <td>
-                    @car.TypeOfCar.Name
-                </td>
-            </tr>
-        }
+
+        @*@foreach (var car in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.ActionLink(car.Name, "Edit", "Cars", new { id = car.Id }, null)
+
+                    </td>
+                    <td>
+                        @car.TypeOfCar.Name
+                    </td>
+                </tr>
+            }*@
     </tbody>
 </table>
+
+
+@section scripts
+    {
+    <script>
+        $(document).ready
+            (function () {
+                var table = $("#cars").DataTable({
+                    ajax: {
+                        url: "/api/cars",
+                        dataSrc: ""
+                    },
+                    columns: [
+                        {
+                            data: "name",
+                            render: function (data, type, car) {
+                                return "<a href='/cars/edit/" + car.id + "'>" + car.name + "</a>";
+                            }
+                        },
+                        {
+                            data: "typeOfCar.name"
+                        },
+                        {
+                            data: "id",
+                            render: function (data) {
+                                return "<button class='btn-link js-delete' data-car-id=" + data + ">Delete</button>"
+                            }
+                        }
+                    ]
+
+                });
+
+                $("#cars").on("click", ".js-delete", function () {
+                    var button = $(this);
+                    bootbox.confirm("Are you sure you want to delete the car ?", function (result) {
+                        if (result) {
+                            $.ajax(
+                                {
+                                    url: "/api/cars/" + button.attr("data-car-id"),
+                                    method: "DELETE",
+                                    success: function () {
+                                        table.row(button.parents("tr")).remove().draw();
+                                    }
+                                });
+                        }
+                    });
+
+                    //if (confirm("Are you sure you want to delete the car?")) {
+                    //    $.ajax(
+                    //        {
+                    //            url: "/api/cars/" + button.attr("data-car-id"),
+                    //            method: "DELETE",
+                    //            success: function () {
+                    //                button.parents("tr").remove();
+                    //            }
+                    //        });
+                    //}
+                }
+                );
+            }
+            );
+    </script>
+}
+

@@ -15,6 +15,7 @@ namespace CarRental.App_Start
             CreateMap<Customer, CustomerDto>().ReverseMap();
             //CreateMap<CustomerDto, Customer>();
             CreateMap<Car, CarDto>().ReverseMap();
+            CreateMap<MembershipType, MembershipTypeDto>().ReverseMap();
         }
     }
 }

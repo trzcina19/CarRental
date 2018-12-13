@@ -24,8 +24,8 @@ namespace CarRental.Controllers
 
         public ViewResult Index()
         {
-            var cars = _context.Cars.Include(m => m.TypeOfCar).ToList();
-            return View(cars);
+        //    var cars = _context.Cars.Include(m => m.TypeOfCar).ToList();
+            return View();
         }
 
         public ActionResult New()

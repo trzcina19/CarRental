@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Data.Entity;
 
 namespace CarRental.Controllers.Api
 {
@@ -20,9 +21,14 @@ namespace CarRental.Controllers.Api
         }
 
         // GET /api/cars
-        public IEnumerable<CarDto> GetCars()
+        public IHttpActionResult GetCars()
         {
-            return _context.Cars.ToList().Select(Mapper.Map<Car, CarDto>);
+            //  return _context.Cars.ToList().Select(Mapper.Map<Car, CarDto>);
+            var carDtos = _context.Cars.
+                Include(c => c.TypeOfCar).
+                ToList().
+                Select(Mapper.Map<Car, CarDto>);
+            return Ok(carDtos);
         }
 
         // GET  /api/cars/1
