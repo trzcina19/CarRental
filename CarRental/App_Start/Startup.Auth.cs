@@ -6,6 +6,7 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using CarRental.Models;
+using CarRental.App_Start;
 
 namespace CarRental
 {
@@ -54,10 +55,11 @@ namespace CarRental
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
-
+            app.UseFacebookAuthentication(
+                
+               appId: LoginsAndSystemPasswords.appId,
+               appSecret: LoginsAndSystemPasswords.appSecret
+            );
             //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             //{
             //    ClientId = "",
