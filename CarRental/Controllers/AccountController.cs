@@ -156,13 +156,12 @@ namespace CarRental.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    // Temp code
-                    var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
-                    var roleManager = new RoleManager<IdentityRole>(roleStore);
-                    await roleManager.CreateAsync(new IdentityRole("CanManageCar"));
-
-                    await UserManager.AddToRoleAsync(user.Id, "CanManageCar");
-
+                    // Temp code - create CanManageCars
+                    //var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
+                    //var roleManager = new RoleManager<IdentityRole>(roleStore);
+                    //await roleManager.CreateAsync(new IdentityRole("CanManageCars"));
+                    //await UserManager.AddToRoleAsync(user.Id, "CanManageCars");
+            
 
 
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);

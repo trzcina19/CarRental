@@ -45,6 +45,7 @@ namespace CarRental.Controllers.Api
 
         // POST /api/cars
         [HttpPost]
+        [Authorize(Roles = RoleName.CanManageCars)]
         public IHttpActionResult CreateCar(CarDto carDto)
         {
             if (!ModelState.IsValid)
@@ -60,6 +61,7 @@ namespace CarRental.Controllers.Api
 
         // PUT /api/cars/1
         [HttpPut]
+        [Authorize(Roles = RoleName.CanManageCars)]
         public void UpdateCar(int id, CarDto carDto)
         {
             if (!ModelState.IsValid)
@@ -75,6 +77,7 @@ namespace CarRental.Controllers.Api
 
         // DELETE /api/cars/1
         [HttpDelete]
+        [Authorize(Roles = RoleName.CanManageCars)]
         public void DeleteCar(int id)
         {
             var carInDb = _context.Cars.SingleOrDefault(c => c.Id == id);

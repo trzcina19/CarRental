@@ -24,22 +24,27 @@ namespace CarRental.Controllers
 
         public ViewResult Index()
         {
-        //    var cars = _context.Cars.Include(m => m.TypeOfCar).ToList();
-            return View();
+            //    var cars = _context.Cars.Include(m => m.TypeOfCar).ToList();
+            if (User.IsInRole(RoleName.CanManageCars))
+                return View("List");
+            else
+                return View("ReadOnlyList");
         }
 
+        [Authorize(Roles = RoleName.CanManageCars)]
         public ActionResult New()
         {
             var car = new Car { ReleaseDate = DateTime.Now };
             var typeOfCars = _context.TypeOfCars.ToList();
             var viewModel = new CarFormViewModel
             {
-                Car=car,
+                Car = car,
                 TypeOfCars = typeOfCars
             };
             return View("carFormViewModel", viewModel);
         }
 
+        [Authorize(Roles = RoleName.CanManageCars)]
         public ActionResult Edit(int id)
         {
             var car = _context.Cars.SingleOrDefault(c => c.Id == id);
@@ -59,13 +64,14 @@ namespace CarRental.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = RoleName.CanManageCars)]
         public ActionResult Save(Car car)
         {
             if (!ModelState.IsValid)
             {
                 var viewModel = new CarFormViewModel
                 {
-                    Car=car,
+                    Car = car,
                     TypeOfCars = _context.TypeOfCars.ToList()
                 };
                 return View("CarFormViewModel", viewModel);
