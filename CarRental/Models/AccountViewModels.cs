@@ -9,6 +9,11 @@ namespace CarRental.Models
         [Required]
         [Display(Name = "Driving License")]
         public string DrivingLicense { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        public string PhoneNumber { get; set; }
+
         [Required]
         [Display(Name = "Email")]
         public string Email { get; set; }
@@ -72,6 +77,9 @@ namespace CarRental.Models
         [Display(Name ="Driving License")]
         public string DrivingLicense { get; set; }
 
+        [Required]
+        [StringLength(50)]
+        public string PhoneNumber { get; set; }
 
         [Required]
         [EmailAddress]
