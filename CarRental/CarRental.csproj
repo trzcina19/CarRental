@@ -233,6 +233,8 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Api\CarsController.cs" />
     <Compile Include="Controllers\Api\CustomersController.cs" />
+    <Compile Include="Dtos\NewRentalDto.cs" />
+    <Compile Include="Controllers\Api\NewRentalsController.cs" />
     <Compile Include="Controllers\CarsController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -297,6 +299,14 @@
     <Compile Include="Migrations\201812180050491_AddPhoneNumerToApplicationUser.Designer.cs">
       <DependentUpon>201812180050491_AddPhoneNumerToApplicationUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201812190146035_AddTableRental.cs" />
+    <Compile Include="Migrations\201812190146035_AddTableRental.Designer.cs">
+      <DependentUpon>201812190146035_AddTableRental.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812201624288_AddNumberAvailableToCar.cs" />
+    <Compile Include="Migrations\201812201624288_AddNumberAvailableToCar.Designer.cs">
+      <DependentUpon>201812201624288_AddNumberAvailableToCar.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Car.cs" />
@@ -305,6 +315,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MembershipType.cs" />
     <Compile Include="Models\Min18YearsIfAMember.cs" />
+    <Compile Include="Models\Rental.cs" />
     <Compile Include="Models\RoleName.cs" />
     <Compile Include="Models\TypeOfCar.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -707,6 +718,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201812180050491_AddPhoneNumerToApplicationUser.resx">
       <DependentUpon>201812180050491_AddPhoneNumerToApplicationUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812190146035_AddTableRental.resx">
+      <DependentUpon>201812190146035_AddTableRental.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812201624288_AddNumberAvailableToCar.resx">
+      <DependentUpon>201812201624288_AddNumberAvailableToCar.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
