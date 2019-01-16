@@ -165,7 +165,7 @@ namespace CarRental.Controllers
                     //var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
                     //var roleManager = new RoleManager<IdentityRole>(roleStore);
                     //await roleManager.CreateAsync(new IdentityRole("CanManageCars"));
-                    //await UserManager.AddToRoleAsync(user.Id, "CanManageCars");
+                   // await UserManager.AddToRoleAsync(user.Id, "CanManageCars");
             
 
 

@@ -1,0 +1,84 @@
+﻿@model dynamic
+@{
+    ViewBag.Title = "New";
+    //    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>New Rental Form</h2>
+
+@*@Ajax,BeginForm()*@
+<form id="newRental">
+    <div class="form-group">
+        <label>Customer</label>
+        <input id="customer" type="text" value="" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>Car</label>
+        <input id="car" type="text" value="" class="form-control" />
+    </div>
+
+    <ul id="cars" class="list-group"></ul>
+
+    <button class="btn btn-primary">Submit</button>
+</form>
+
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+
+            // Customer
+            var vm = { carIds: []};
+
+            var customers = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                remote: {
+                    url: '/api/customers?query=%QUERY',
+                    wildcard: '%QUERY'
+                }
+            });
+
+            $('#customer').typeahead(
+                {
+                    minLength: 3,
+                    highlight: true
+
+                }
+                , {
+                    name: 'customers',
+                    display: 'name',
+                    source: customers
+                }).on("typeahead:select", function (e, customer) {
+
+                    vm.customerId = customer.id;
+                });
+
+            // Car
+            var cars = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                remote: {
+                    url: '/api/cars?query=%QUERY',
+                    wildcard: '%QUERY'
+                }
+            });
+            $('#car').typeahead({
+                minLength: 3,
+                highlight: true
+            }, {
+                    name: 'cars',
+                    display: 'name',
+                    source: cars
+                }).on("typeahead:select", function (e, car) {
+                    $("#cars").append("<li class='list-group-item'>" + car.name + "</li>");
+                    $("#car").typeahead("val", "");
+                    vm.carIds.push(car.id);
+                   
+                });
+
+        });
+    </script>
+}

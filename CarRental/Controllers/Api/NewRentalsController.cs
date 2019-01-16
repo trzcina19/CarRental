@@ -21,9 +21,10 @@ namespace CarRental.Controllers.Api
         [HttpPost]
         public IHttpActionResult CreateNewRentals(NewRentalDto newRental)
         {
-            //   throw new NotImplementedException() ;
+            // Edge cases
             var customer = _context.Customers.Single(
               c => c.Id == newRental.CustomerId);
+
 
             var cars = _context.Cars.Where(
                 m => newRental.CarIds.Contains(m.Id)).ToList();
