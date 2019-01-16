@@ -21,15 +21,49 @@ namespace CarRental.Controllers.Api
         }
 
         // GET /api/cars
-        public IHttpActionResult GetCars()
+        //public IHttpActionResult GetCars()
+        //{
+        //    //  return _context.Cars.ToList().Select(Mapper.Map<Car, CarDto>);
+        //    var carDtos = _context.Cars.
+        //        Include(c => c.TypeOfCar).
+        //        ToList().
+        //        Select(Mapper.Map<Car, CarDto>);
+        //    return Ok(carDtos);
+        //}
+
+        public IEnumerable<CarDto> GetCars(string query = null)
         {
-            //  return _context.Cars.ToList().Select(Mapper.Map<Car, CarDto>);
-            var carDtos = _context.Cars.
-                Include(c => c.TypeOfCar).
-                ToList().
-                Select(Mapper.Map<Car, CarDto>);
-            return Ok(carDtos);
+            var carsQuery = _context.Cars
+                .Include(m => m.TypeOfCar)
+                .Where(m => m.NumberAvailable > 0);
+
+            if (!String.IsNullOrWhiteSpace(query))
+                carsQuery = carsQuery.Where(m => m.Name.Contains(query));
+
+            return carsQuery
+                .ToList()
+                .Select(Mapper.Map<Car, CarDto>);
         }
+
+
+
+        //public IEnumerable<CarDto> GetCars(string query = null)
+        //{
+        //    //  return _context.Cars.ToList().Select(Mapper.Map<Car, CarDto>);
+        //    var carsQuery = _context.Cars
+        //                .Include(m => m.TypeOfCar)
+        //                .Where(m => m.NumberAvailable > 0);
+
+        //    if (!String.IsNullOrWhiteSpace(query))
+        //        carsQuery = carsQuery.Where(m => m.Name.Contains(query));
+
+        //    return carsQuery
+        //        .ToList()
+        //        .Select(Mapper.Map<Car, CarDto>);
+        //}
+
+
+
 
         // GET  /api/cars/1
         public IHttpActionResult GetCar(int id)
