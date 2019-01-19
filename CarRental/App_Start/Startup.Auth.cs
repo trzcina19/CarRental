@@ -7,6 +7,7 @@ using Microsoft.Owin.Security.Google;
 using Owin;
 using CarRental.Models;
 using CarRental.App_Start;
+using System.Configuration;
 
 namespace CarRental
 {
@@ -56,9 +57,14 @@ namespace CarRental
             //   consumerSecret: "");
 
             app.UseFacebookAuthentication(
-                
-               appId: LoginsAndSystemPasswords.appId,
-               appSecret: LoginsAndSystemPasswords.appSecret
+
+            // Securing Configuration Settings when Deploy
+             appId: ConfigurationManager.AppSettings["FacebookAppId"],
+             appSecret: ConfigurationManager.AppSettings["FacebookAppSecret"]
+
+            // Passwors in gitignore file
+            //appId: LoginsAndSystemPasswords.appId,
+            //appSecret: LoginsAndSystemPasswords.appSecret
             );
             //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             //{

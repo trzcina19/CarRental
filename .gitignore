@@ -3,6 +3,7 @@
 
 # Project files (logins, passwords)
 CarRental/App_Start/LoginsAndSystemPasswords.cs
+CarRental/AppSettings.config
 
 # User-specific files
 *.suo
